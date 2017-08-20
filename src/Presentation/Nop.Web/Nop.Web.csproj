@@ -28,6 +28,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>f94c814a</NuGetPackageImportStamp>
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -973,6 +974,60 @@
     <Content Include="Scripts\public.onepagecheckout.js" />
     <Content Include="Scripts\public.common.js" />
     <Content Include="Themes\DefaultClean\Content\css\print.css" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\css\ie8.css" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\css\print.css" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\css\styles.css" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\css\styles.rtl.css" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\ajax-loader-small.gif" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\back-button.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\calendar-next.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\calendar-prev.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\close.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\compare-button.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\details.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\discontinued-product-icon.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\download-button.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\edit.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\edit_.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\email-button.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\first.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\ie_warning.jpg" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\last.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\loading.gif" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\logo.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\menu-icon.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\move.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\new.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\next.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\pointer.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\prev.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\rating1.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\rating2.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\remove.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\remove_.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\reply.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\retry.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\return.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\rss.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\shipping.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\shopping-bag.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\social-sprite.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\subscribe-button.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\toggle-black.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\toggle-gray.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\toggle-white.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\topic-type1.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\topic-type2.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\topic-type3.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\view-grid.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\view-list.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\vote-down-selected.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\vote-down.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\vote-up-selected.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\vote-up.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\watch.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\Content\images\wishlist-button.png" />
+    <Content Include="Themes\StationeryOfficeSupplies\preview.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1029,6 +1084,9 @@
     <Content Include="Views\Vendor\Info.cshtml" />
     <Content Include="Views\Common\Logo.cshtml" />
     <Content Include="Views\Customer\EmailRevalidation.cshtml" />
+    <Content Include="Themes\StationeryOfficeSupplies\theme.config" />
+    <Content Include="Themes\StationeryOfficeSupplies\Views\Shared\Head.cshtml" />
+    <Content Include="Themes\StationeryOfficeSupplies\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />
