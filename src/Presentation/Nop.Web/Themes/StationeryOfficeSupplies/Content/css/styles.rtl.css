@@ -2281,7 +2281,7 @@ label, label + * {
     cursor: pointer;
 }
 .attribute-squares .selected-value .attribute-square-container {
-	background-color: #4ab2f1;
+	background-color: rgba(37, 143, 44, 0.5);
 }
 .attribute-squares li input {
 	position: relative;
