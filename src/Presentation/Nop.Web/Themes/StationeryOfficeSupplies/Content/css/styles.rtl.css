@@ -427,7 +427,7 @@ label, label + * {
 }
 .cart .product .edit-item a {
 	font-weight: normal;
-	color: #4ab2f1;
+	color: #fe1313;
 }
 .cart .product .edit-item a:hover {
 	text-decoration: underline;
@@ -3545,7 +3545,7 @@ label, label + * {
 	display: inline-block;
 	min-width: 140px;
 	border: none;
-	background-color: #4ab2f1;
+	background-color: #4e9f49;
 	padding: 10px 30px;
 	text-align: center;
 	font-size: 15px;
@@ -3553,7 +3553,7 @@ label, label + * {
 	text-transform: uppercase;
 }
 .checkout-page .button-1:hover {
-	background-color: #248ece;
+	background-color: #258f2c;
 }
 
 .checkout-page .address-item {
@@ -3760,8 +3760,8 @@ label, label + * {
 	background-color: #f6f6f6;
 }
 .opc .allow .step-title {
-	background-color: #4ab2f1;
-	cursor: pointer;
+    background-color: #4e9f49;
+    cursor: pointer;
 }
 .opc .step-title .number,
 .opc .step-title .title {
@@ -3783,7 +3783,7 @@ label, label + * {
 	text-align: center;
 }
 .opc .allow .step-title .number {
-	background-color: #248ece;
+    background-color: #258f2c;
 }
 .opc .step {
 	margin: 10px 0;

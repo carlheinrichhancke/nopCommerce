@@ -1,0 +1,5 @@
+﻿1. Set project output path to ..\..\Presentation\Nop.Web\Plugins\{PluginName}\ (both 'Release' and 'Debug' configurations)
+
+
+2. All views (cshtml files) and web.config file should have "Build action" set to "Content" and "Copy to output directory" set to "Copy if newer"
+
