@@ -6966,3 +6966,22 @@ pre {
 }
 
 }
+
+
+/*** NIVO SLIDER PLUGIN STYLES ***/
+.nivoSlider {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nivoSlider img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    max-width: none;
+    max-height: 450px !important;
+}
