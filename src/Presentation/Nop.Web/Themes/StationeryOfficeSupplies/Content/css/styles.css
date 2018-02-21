@@ -389,8 +389,8 @@ label, label + * {
 .cart a,
 .data-table a,
 .forum-table a {
-	font-weight: normal;
-	color: #4ab2f1;
+    font-weight: normal;
+    color: #fe1313;
 }
 .cart a:hover,
 .data-table a:hover,
@@ -3036,7 +3036,7 @@ label, label + * {
 }
 .address-list-page .button-2:hover,
 .order-list-page .button-2:hover {
-	color: #4ab2f1;
+    color: #fe1313;
 }
 .address-list-page .add-button {
 	margin: 0 0 20px;
@@ -3720,7 +3720,7 @@ label, label + * {
 	text-transform: uppercase;
 }
 .order-completed .details a {
-	color: #4ab2f1;
+	color: #fe1313;
 }
 .order-completed .details a:hover {
 	text-decoration: underline;
@@ -3790,7 +3790,7 @@ label, label + * {
 	color: #444;
 }
 .opc .back-link a:hover {
-	color: #4ab2f1;
+	color: #fe1313;
 }
 .opc .buttons .please-wait {
 	display: block;
@@ -3840,10 +3840,10 @@ label, label + * {
 	background-color: #999;
 }
 .order-details-page .page-title a.print-order-button {
-	background-color: #4ab2f1;
+	background-color: #4e9f49;
 }
 .order-details-page .page-title a.print-order-button:hover {
-	background-color: #248ece;
+	background-color: #258f2c;
 }
 
 .order-details-page .order-overview {
@@ -3859,7 +3859,7 @@ label, label + * {
 }
 .order-details-page .order-overview .order-total strong {
 	font-weight: normal;
-	color: #4ab2f1;
+	color: #fe1313;
 }
 
 .order-details-page .repost .button-2 {
@@ -3931,10 +3931,10 @@ label, label + * {
 	background-color: #999;
 }
 .order-details-page .actions input:first-child {
-	background-color: #4ab2f1;
+	background-color: #4e9f49;
 }
 .order-details-page .actions input:first-child:hover {
-	background-color: #248ece;
+	background-color: #258f2c;
 }
 
 .order-details-page .totals.section {
@@ -3982,17 +3982,17 @@ label, label + * {
 	text-align: center;
 }
 .search-input .button-1 {
-	min-width: 140px;
-	border: none;
-	background-color: #4ab2f1;
+    min-width: 140px;
+    border: none;
+    background-color: #4e9f49;
     padding: 10px 30px;
-	text-align: center;
-	font-size: 15px;
-	color: #fff;
-	text-transform: uppercase;
+    text-align: center;
+    font-size: 15px;
+    color: #fff;
+    text-transform: uppercase;
 }
 .search-input .button-1:hover {
-	background-color: #248ece;
+	background-color: #258f2c;
 }
 .search-results {
 	margin: 30px 0 0;
@@ -4050,7 +4050,7 @@ label, label + * {
 	color: #444;
 }
 .sitemap-page a:hover {
-	color: #4ab2f1;
+	color: #fe1313;
 }
 .sitemap-page a:empty {
 	display: none;

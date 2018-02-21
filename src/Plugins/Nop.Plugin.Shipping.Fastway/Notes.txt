@@ -1,0 +1,7 @@
+﻿Fastway tracking numbers are identified as numbers starting with '3a'.
+
+API URL currently used is: https://api.fastway.org/v2
+
+Tracking URL is provided as: http://www.fastway.co.za/our-services/track-your-parcel
+Tracking URL does not pre-populate or auto search tracking number.
+To query Fastway on whether a URL is available that allows for pre-populating or auto searching.

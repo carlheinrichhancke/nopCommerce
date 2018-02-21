@@ -1,0 +1,113 @@
+﻿@{ 
+    Layout = "";
+}
+@model Nop.Plugin.Shipping.Fastway.Models.FastwayShippingModel
+@using Nop.Web.Framework
+
+@using (Html.BeginForm()) {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var countryId = "#@Html.FieldIdFor(model => model.Country)";
+            var regFranId = "#@Html.FieldIdFor(model => model.RegionalFranchise)";
+
+            $(countryId).change(function () {
+                $(".panel-body").find("input, textarea, button, select").prop("disabled", true);
+
+                $.ajax({
+                    method: "GET",
+                    url: "@Url.Action("RegionalFranchises", "ShippingFastway")",
+                    data: { country: $(countryId).val() },
+                    success: function (data) {
+                        $(regFranId).empty();
+                        $.each(data, function (idx, val) {
+                            $(regFranId).append($("<option></option>").attr("value", val.Value).text(val.Text));
+                        });
+                        $(regFranId + " :selected").prop("selected", false);
+
+                        $(".panel-body").find("input, textarea, button, select").prop("disabled", false);
+                    },
+                    error: function (xhr, opt, error) {
+                        $(".panel-body").find("input, textarea, button, select").prop("disabled", false);
+                    }
+                });
+            });
+        });
+    </script>
+
+    @Html.AntiForgeryToken()
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.ApiBaseUrl)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.ApiBaseUrl)
+                        @Html.ValidationMessageFor(model => model.ApiBaseUrl)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.ApiKey)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.ApiKey)
+                        @Html.ValidationMessageFor(model => model.ApiKey)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.AdditionalHandlingCharge)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.AdditionalHandlingCharge)
+                        @Html.ValidationMessageFor(model => model.AdditionalHandlingCharge)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.OverrideStoreCheckboxFor(model => model.EnableVerboseLogging_OverrideForStore, model => model.EnableVerboseLogging, Model.ActiveStoreScopeConfiguration)
+                        @Html.NopLabelFor(model => model.EnableVerboseLogging)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.EnableVerboseLogging)
+                        @Html.ValidationMessageFor(model => model.EnableVerboseLogging)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.Country)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopDropDownListFor(model => model.Country, Model.AvailableCountries)
+                        @Html.ValidationMessageFor(model => model.Country)
+                    </div>
+                </div>
+                @if (Model.AvailableRegionalFranchises.Count > 0) {
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.RegionalFranchise)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.NopDropDownListFor(model => model.RegionalFranchise, Model.AvailableRegionalFranchises)
+                            @Html.ValidationMessageFor(model => model.RegionalFranchise)
+                        </div>
+                    </div>
+                } else {
+                    <div class="form-group">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9">
+                            <p class="field-validation-error">@T("Plugins.Shipping.Fastway.Fields.ValidApiKeyMessage").Text</p>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" name="save" class="btn btn-primary" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

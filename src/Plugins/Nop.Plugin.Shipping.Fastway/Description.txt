@@ -1,0 +1,9 @@
+﻿Group: Shipping rate computation
+FriendlyName: Fastway
+SystemName: Shipping.Fastway
+Version: 1.00
+SupportedVersions: 3.90
+Author: FFN Software
+DisplayOrder: 1
+FileName: Nop.Plugin.Shipping.Fastway.dll
+Description: This plugin offers shipping rates & tracking by Fastway
