@@ -11,6 +11,7 @@ using Nop.Services.Shipping;
 using Nop.Services.Shipping.Tracking;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,14 +115,17 @@ namespace Nop.Plugin.Shipping.Fastway
 
             var response = new GetShippingOptionResponse();
 
+            // if we don't have a delivery city avialable,
+            // start requesting potential delivery suburbs from the API for later use
+            Task<FastwayDeliverySuburbs> deliverySuburbs = null;
+            if (String.IsNullOrWhiteSpace(getShippingOptionRequest.ShippingAddress.City))
+                deliverySuburbs = _fastwayApi.GetDeliverySuburbsAsync(_fastwaySettings.RegionalFranchise);
+
             if (getShippingOptionRequest.Items == null || !getShippingOptionRequest.Items.Any())
                 response.AddError("No shipment items");
 
             if (getShippingOptionRequest.ShippingAddress == null)
                 response.AddError("No shipping address");
-
-            if (String.IsNullOrWhiteSpace(getShippingOptionRequest.ShippingAddress.City))
-                response.AddError("No shipping address city");
 
             if (String.IsNullOrWhiteSpace(getShippingOptionRequest.ShippingAddress.ZipPostalCode))
                 response.AddError("No shipping address postal code");
@@ -141,9 +145,16 @@ namespace Nop.Plugin.Shipping.Fastway
             var weight = Convert.ToSingle(_measureService.ConvertFromPrimaryMeasureWeight(weightTmp, TargetWeightMeasurement));
 
             try {
+                // get the final delivery city that will be used
+                var city = getShippingOptionRequest.ShippingAddress.City;
+                if (String.IsNullOrWhiteSpace(city))
+                    city = deliverySuburbs?.Result.Result.FirstOrDefault()?.Town;
+                if (String.IsNullOrWhiteSpace(city))
+                    response.AddError("No shipping address city");
+
                 var rates = _fastwayApi.GetShippingRates(
                     _fastwaySettings.RegionalFranchise,
-                    getShippingOptionRequest.ShippingAddress.City,
+                    city,
                     getShippingOptionRequest.ShippingAddress.ZipPostalCode,
                     weight,
                     length,
@@ -153,7 +164,7 @@ namespace Nop.Plugin.Shipping.Fastway
                 foreach (var psc in rates.Result.Services) {
                     response.ShippingOptions.Add(new Core.Domain.Shipping.ShippingOption {
                         Name = $"Fastway {psc.Name}",
-                        Rate = Convert.ToDecimal(psc.TotalPriceNormal) + _fastwaySettings.AdditionalHandlingCharge
+                        Rate = Convert.ToDecimal(psc.TotalPriceNormal, CultureInfo.InvariantCulture) + _fastwaySettings.AdditionalHandlingCharge
                     });
                 }
             } catch (NopException ex) {

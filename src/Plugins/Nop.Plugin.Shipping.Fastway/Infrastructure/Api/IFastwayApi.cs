@@ -17,6 +17,14 @@ namespace Nop.Plugin.Shipping.Fastway.Infrastructure.Api
         Task<FastwayRegionalFranchises> GetRegionalFranchisesAsync(FastwayCountries country);
 
         /// <summary>
+        /// Get available delivery suburbs for a Regional Franchise & by an optional Search Term
+        /// </summary>
+        /// <param name="rfcode">The Regional Franchise Code of the shipment pickup franchise</param>
+        /// <param name="searchTerm">The Search Term to additionally apply to the results</param>
+        /// <returns>Fastway Delivery Suburbs</returns>
+        Task<FastwayDeliverySuburbs> GetDeliverySuburbsAsync(string rfcode, string searchTerm = null);
+
+        /// <summary>
         /// Get shipping services for a shipment
         /// </summary>
         /// <param name="rfcode">The Regional Franchise Code of the shipment pickup franchise</param>

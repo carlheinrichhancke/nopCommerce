@@ -57,6 +57,40 @@ namespace Nop.Plugin.Shipping.Fastway.Infrastructure.Api
         }
 
         /// <summary>
+        /// Get available delivery suburbs for a Regional Franchise & by an optional Search Term
+        /// </summary>
+        /// <param name="rfcode">The Regional Franchise Code of the shipment pickup franchise</param>
+        /// <param name="searchTerm">The Search Term to additionally apply to the results</param>
+        /// <returns>Fastway Delivery Suburbs</returns>
+        public async Task<FastwayDeliverySuburbs> GetDeliverySuburbsAsync(string rfcode, string searchTerm = null)
+        {
+            var deliverySuburbs = new FastwayDeliverySuburbs();
+
+            if (String.IsNullOrWhiteSpace(_fastwaySettings.ApiKey))
+                _logger.Warning($"No Fastway API Key set. Could not retrieve delivery suburbs for regional franchise {rfcode} & search term {searchTerm}");
+
+            try {
+                var apiUrl = $"{_fastwaySettings.ApiBaseUrl}/psc/listdeliverysuburbs/{rfcode}/{searchTerm}?api_key={_fastwaySettings.ApiKey}";
+                if (_fastwaySettings.EnableVerboseLogging)
+                    _logger.Information($"Retrieving Fastway delivery suburbs using API URL: {apiUrl}");
+
+                using (var httpClient = new HttpClient()) {
+                    var resp = httpClient.GetAsync(apiUrl).Result;
+                    var json = await resp.Content.ReadAsStringAsync();
+
+                    if (_fastwaySettings.EnableVerboseLogging)
+                        _logger.Information($"Fastway delivery suburbs successfully retrieved for regional franchise {rfcode} & search term {searchTerm}");
+
+                    deliverySuburbs = JsonConvert.DeserializeObject<FastwayDeliverySuburbs>(json);
+                }
+            } catch (Exception ex) {
+                _logger.Error($"Error occurred while retrieving Fastway delivery suburbs. Exception message: {ex.Message}", ex);
+            }
+
+            return deliverySuburbs;
+        }
+
+        /// <summary>
         /// Get shipping services for a shipment
         /// </summary>
         /// <param name="rfcode">The Regional Franchise Code of the shipment pickup franchise</param>

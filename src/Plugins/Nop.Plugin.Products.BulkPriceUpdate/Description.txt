@@ -1,0 +1,9 @@
+﻿Group: Catalog Management
+FriendlyName: Bulk Price Update
+SystemName: Products.BulkPriceUpdate
+Version: 1.00
+SupportedVersions: 3.90
+Author: FFN Software
+DisplayOrder: 1
+FileName: Nop.Plugin.Products.BulkPriceUpdate.dll
+Description: This plugin adds the ability to update pricing for several products at once

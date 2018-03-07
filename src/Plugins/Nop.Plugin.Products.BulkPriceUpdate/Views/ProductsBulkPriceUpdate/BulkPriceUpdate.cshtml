@@ -1,0 +1,184 @@
+﻿@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+@using Nop.Plugin.Products.BulkPriceUpdate.Domain
+
+@model Nop.Plugin.Products.BulkPriceUpdate.Models.BulkPriceUpdateModel
+
+@{
+    Layout = "_AdminLayout.cshtml";
+
+    //page title
+    ViewBag.Title = T("Plugins.Products.BulkPriceUpdate").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("ProductsBulkPriceUpdate");
+}
+
+@using (Html.BeginForm()) {
+    <script type="text/javascript"> 
+        $(document).ready(function () {
+            // set starting state of price increase controls
+            $(".product-cost-input").find("input, textarea, button, select").prop("disabled", @((!Model.UpdateProductCosts).ToString().ToLower()));
+            $(".price-input").find("input, textarea, button, select").prop("disabled", @((!Model.UpdatePrices).ToString().ToLower()));
+
+            var updateById = "#@Html.FieldIdFor(model => model.PriceUpdateBy)";
+            var prodCostId = "#@Html.FieldIdFor(model => model.UpdateProductCosts)";
+            var priceId = "#@Html.FieldIdFor(model => model.UpdatePrices)";
+
+            $(updateById).change(function () {
+                $(".group-by-selector").hide();
+
+                switch ($(updateById).val()) {
+                    case "@((int)BulkPriceUpdateByOptions.Vendor)":
+                        $("#ddl-vendor").show();
+                        break;
+                    case "@((int)BulkPriceUpdateByOptions.Manufacturer)":
+                        $("#ddl-manufacturer").show();
+                        break;
+                    case "@((int)BulkPriceUpdateByOptions.Category)":
+                        $("#ddl-category").show();
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            $(prodCostId).change(function () {
+                $(".product-cost-input").find("input, textarea, button, select").prop("disabled", !this.checked);
+            });
+
+            $(priceId).change(function () {
+                $(".price-input").find("input, textarea, button, select").prop("disabled", !this.checked);
+            });
+        });
+    </script>
+
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Plugins.Products.BulkPriceUpdate")
+        </h1>
+        <div class="pull-right">
+            &nbsp;
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    @Html.NopLabelFor(model => model.PriceUpdateBy)
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.NopDropDownListFor(model => model.PriceUpdateBy, Model.AvailablePriceUpdateBy)
+                                    @Html.ValidationMessageFor(model => model.PriceUpdateBy)
+                                </div>
+                                <div class="col-md-4">
+                                    <div id="ddl-vendor" class="group-by-selector" @(Model.PriceUpdateBy == BulkPriceUpdateByOptions.Vendor ? null : Html.Raw("style=\"display:none\""))>
+                                        @Html.NopDropDownListFor(model => model.Vendor, Model.AvailableVendors)
+                                    </div>
+                                    <div id="ddl-manufacturer" class="group-by-selector" @(Model.PriceUpdateBy == BulkPriceUpdateByOptions.Manufacturer ? null : Html.Raw("style=\"display:none\""))>
+                                        @Html.NopDropDownListFor(model => model.Manufacturer, Model.AvailableManufacturers)
+                                    </div>
+                                    <div id="ddl-category" class="group-by-selector" @(Model.PriceUpdateBy == BulkPriceUpdateByOptions.Category ? null : Html.Raw("style=\"display:none\""))>
+                                        @Html.NopDropDownListFor(model => model.Category, Model.AvailableCategories)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    @Html.NopLabelFor(model => model.UpdateProductCosts)
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="col-md-1">
+                                        @Html.NopEditorFor(model => model.UpdateProductCosts)
+                                    </div>
+                                    <div class="col-md-11 product-cost-input">
+                                        <div class="col-md-6">
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButton("ProductCostUpdateType", BulkPriceUpdateTypes.Perc, (Model.ProductCostUpdateType == BulkPriceUpdateTypes.Perc), new { id = "ProductCostUpdateType_Perc" })
+                                                    @T("Plugins.Products.BulkPriceUpdate.Percentage")
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButton("ProductCostUpdateType", BulkPriceUpdateTypes.Flat, (Model.ProductCostUpdateType == BulkPriceUpdateTypes.Flat), new { id = "ProductCostUpdateType_Flat" })
+                                                    @T("Plugins.Products.BulkPriceUpdate.FlatAmount")
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 product-cost-input">
+                                    @Html.NopEditorFor(model => model.ProductCostUpdateValue)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    @Html.NopLabelFor(model => model.UpdatePrices)
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="col-md-1">
+                                        @Html.NopEditorFor(model => model.UpdatePrices)
+                                    </div>
+                                    <div class="col-md-11 price-input">
+                                        <div class="col-md-6">
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButton("PriceUpdateType", BulkPriceUpdateTypes.Perc, (Model.PriceUpdateType == BulkPriceUpdateTypes.Perc), new { id = "PriceUpdateType_Perc" })
+                                                    @T("Plugins.Products.BulkPriceUpdate.Percentage")
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButton("PriceUpdateType", BulkPriceUpdateTypes.Flat, (Model.PriceUpdateType == BulkPriceUpdateTypes.Flat), new { id = "PriceUpdateType_Flat" })
+                                                    @T("Plugins.Products.BulkPriceUpdate.FlatAmount")
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 price-input">
+                                    @Html.NopEditorFor(model => model.PriceUpdateValue)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    @Html.NopLabelFor(model => model.UpdateOldPrices)
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="col-md-1">
+                                        @Html.NopEditorFor(model => model.UpdateOldPrices)
+                                    </div>
+                                    <div class="col-md-11"></div>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-1 col-md-offset-11">
+                                    <input type="submit" name="save" class="btn btn-primary" value="@T("Admin.Common.Save")" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
