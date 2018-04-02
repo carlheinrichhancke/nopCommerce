@@ -92,6 +92,8 @@ namespace Nop.Plugin.Products.BulkPriceUpdate.Services
                 prod.Price = GetUpdatedValue(updateType, prod.Price, value);
             }
 
+            _productService.UpdateProducts(products);
+
             if (_settings.EnableVerboseLogging)
                 _logger.Information($"Prices successfully updated for {products.TotalCount} products");
         }

@@ -6,6 +6,7 @@ using Nop.Plugin.Products.BulkPriceUpdate.Services;
 using Nop.Services.Catalog;
 using Nop.Services.Configuration;
 using Nop.Services.Localization;
+using Nop.Services.Logging;
 using Nop.Services.Vendors;
 using Nop.Web.Framework.Controllers;
 using System;
@@ -26,6 +27,7 @@ namespace Nop.Plugin.Products.BulkPriceUpdate.Controllers
         private readonly IVendorService _vendorService;
         private readonly ICategoryService _categoryService;
         private readonly IBulkPriceUpdateService _bulkPriceUpdateService;
+        private readonly ILogger _logger;
 
         public ProductsBulkPriceUpdateController(BulkPriceUpdateSettings settings,
             ISettingService settingService,
@@ -33,7 +35,8 @@ namespace Nop.Plugin.Products.BulkPriceUpdate.Controllers
             IManufacturerService manufacturerService,
             IVendorService vendorService,
             ICategoryService categoryService,
-            IBulkPriceUpdateService bulkPriceUpdateService)
+            IBulkPriceUpdateService bulkPriceUpdateService,
+            ILogger logger)
         {
             this._settings = settings;
             this._settingService = settingService;
@@ -42,6 +45,7 @@ namespace Nop.Plugin.Products.BulkPriceUpdate.Controllers
             this._vendorService = vendorService;
             this._categoryService = categoryService;
             this._bulkPriceUpdateService = bulkPriceUpdateService;
+            this._logger = logger;
         }
 
         [ChildActionOnly]
@@ -91,8 +95,22 @@ namespace Nop.Plugin.Products.BulkPriceUpdate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult BulkPriceUpdate(BulkPriceUpdateModel model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) {
+                if (_settings.EnableVerboseLogging) {
+                    var modelErrors = String.Empty;
+
+                    foreach (var val in ModelState.Values)
+                    foreach (var error in val.Errors) {
+                            modelErrors += error.ErrorMessage + "\r\n";
+                    }
+
+                    _logger.Warning($"Model State invalid on bulk price update. Errors:\r\n{modelErrors}");
+                }
+
+                ErrorNotification(_localizationService.GetResource("Plugins.Products.BulkPriceUpdate.SaveError"));
+
                 return BulkPriceUpdate();
+            }
 
             var updateById = (int?)null;
             switch (model.PriceUpdateBy) {

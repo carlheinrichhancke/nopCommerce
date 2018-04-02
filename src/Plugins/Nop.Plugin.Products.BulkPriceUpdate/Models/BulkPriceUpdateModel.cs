@@ -1,7 +1,10 @@
 ﻿using Nop.Plugin.Products.BulkPriceUpdate.Domain;
+using Nop.Plugin.Products.BulkPriceUpdate.Infrastructure.ModelBinders;
 using Nop.Web.Framework;
+using Nop.Web.Framework.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +12,8 @@ using System.Web.Mvc;
 
 namespace Nop.Plugin.Products.BulkPriceUpdate.Models
 {
-    public class BulkPriceUpdateModel
+    [ModelBinder(typeof(DecimalModelBinder))]
+    public class BulkPriceUpdateModel : BaseNopModel
     {
         public BulkPriceUpdateModel()
         {

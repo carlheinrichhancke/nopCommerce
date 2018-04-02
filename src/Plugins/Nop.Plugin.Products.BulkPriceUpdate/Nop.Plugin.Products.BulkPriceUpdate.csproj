@@ -80,6 +80,7 @@
     <Compile Include="Domain\BulkPriceUpdateTypes.cs" />
     <Compile Include="Infrastructure\DependencyRegistrar.cs" />
     <Compile Include="Infrastructure\Helpers\SelectListHelper.cs" />
+    <Compile Include="Infrastructure\ModelBinders\DecimalModelBinder.cs" />
     <Compile Include="Models\BulkPriceUpdateConfigModel.cs" />
     <Compile Include="Models\BulkPriceUpdateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

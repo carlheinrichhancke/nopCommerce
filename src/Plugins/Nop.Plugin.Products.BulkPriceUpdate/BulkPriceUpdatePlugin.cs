@@ -80,6 +80,7 @@ namespace Nop.Plugin.Products.BulkPriceUpdate
             this.AddOrUpdatePluginLocaleResource("Plugins.Products.BulkPriceUpdate.UpdateOldPrice", "Update Old Price");
             this.AddOrUpdatePluginLocaleResource("Plugins.Products.BulkPriceUpdate.UpdateOldPrice.Hint", "Enable to update the Old Price for products with the previous Price");
             this.AddOrUpdatePluginLocaleResource("Plugins.Products.BulkPriceUpdate.Saved", "Prices updated successfully");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Products.BulkPriceUpdate.SaveError", "Prices could not be updated");
             this.AddOrUpdatePluginLocaleResource("Plugins.Products.BulkPriceUpdate.Fields.EnableVerboseLogging", "Enable Verbose Logging");
             this.AddOrUpdatePluginLocaleResource("Plugins.Products.BulkPriceUpdate.Fields.EnableVerboseLogging.Hint", "Toggles verbose logging which, if enabled, writes additional log entries for tracing purposes");
 
@@ -105,6 +106,7 @@ namespace Nop.Plugin.Products.BulkPriceUpdate
             this.DeletePluginLocaleResource("Plugins.Products.BulkPriceUpdate.UpdateOldPrice");
             this.DeletePluginLocaleResource("Plugins.Products.BulkPriceUpdate.UpdateOldPrice.Hint");
             this.DeletePluginLocaleResource("Plugins.Products.BulkPriceUpdate.Saved");
+            this.DeletePluginLocaleResource("Plugins.Products.BulkPriceUpdate.SaveError");
             this.DeletePluginLocaleResource("Plugins.Products.BulkPriceUpdate.Fields.EnableVerboseLogging");
             this.DeletePluginLocaleResource("Plugins.Products.BulkPriceUpdate.Fields.EnableVerboseLogging.Hint");
 

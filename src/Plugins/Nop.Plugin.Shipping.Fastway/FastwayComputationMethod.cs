@@ -115,12 +115,6 @@ namespace Nop.Plugin.Shipping.Fastway
 
             var response = new GetShippingOptionResponse();
 
-            // if we don't have a delivery city avialable,
-            // start requesting potential delivery suburbs from the API for later use
-            Task<FastwayDeliverySuburbs> deliverySuburbs = null;
-            if (String.IsNullOrWhiteSpace(getShippingOptionRequest.ShippingAddress.City))
-                deliverySuburbs = _fastwayApi.GetDeliverySuburbsAsync(_fastwaySettings.RegionalFranchise);
-
             if (getShippingOptionRequest.Items == null || !getShippingOptionRequest.Items.Any())
                 response.AddError("No shipment items");
 
@@ -134,7 +128,13 @@ namespace Nop.Plugin.Shipping.Fastway
             // know what all needs fixing in one response
             if (response.Errors.Count > 0)
                 return response;
-            
+
+            // if we don't have a delivery city avialable,
+            // start requesting potential delivery suburbs from the API for later use
+            Task<FastwayDeliverySuburbs> deliverySuburbs = null;
+            if (String.IsNullOrWhiteSpace(getShippingOptionRequest.ShippingAddress.City))
+                deliverySuburbs = _fastwayApi.GetDeliverySuburbsAsync(_fastwaySettings.RegionalFranchise, getShippingOptionRequest.ShippingAddress.ZipPostalCode);
+
             _shippingService.GetDimensions(getShippingOptionRequest.Items, out decimal widthTmp, out decimal lengthTmp, out decimal heightTmp);
             var weightTmp = _shippingService.GetTotalWeight(getShippingOptionRequest);
 
