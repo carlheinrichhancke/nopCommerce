@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "";
+}
+
+@model Nop.Plugin.Docs.PdfManager.Models.PdfManagerConfigModel
+@using Nop.Web.Framework
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.LogoWidth)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.LogoWidth)
+                        @Html.ValidationMessageFor(model => model.LogoWidth)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.LogoHeight)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.LogoHeight)
+                        @Html.ValidationMessageFor(model => model.LogoHeight)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.EnableVerboseLogging)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.EnableVerboseLogging)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" name="save" class="btn btn-primary" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

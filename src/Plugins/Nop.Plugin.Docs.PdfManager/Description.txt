@@ -1,0 +1,9 @@
+﻿Group: Document Management
+FriendlyName: PDF Manager
+SystemName: Docs.PdfManager
+Version: 1.00
+SupportedVersions: 3.90
+Author: FFN Software
+DisplayOrder: 1
+FileName: Nop.Plugin.Docs.PdfManager.dll
+Description: This plugin allows setting values locked into nopCommerce, that's used when generating PDF documents
